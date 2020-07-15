@@ -3,19 +3,17 @@
 const inputArray = JSON.parse(process.argv.slice(2)[0]);
 
 const bubbleSort = (array) => {
-  for (let i = 0; i < array.length; i++) {
-    console.log("outside loop current: ", array);
-    for (let j = i; j < array.length; j++) {
-      console.log("i", i);
-      console.log("j", j);
-      console.log("array[i]", array[i]);
-      console.log("array[j]", array[j]);
-      if (array[i] > array[j]) {
-        //swap
+  let swapped = true;
+  while (swapped) {
+    swapped = false;
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] > array[i + 1]) {
+        console.log("pre swap: ", array);
         const temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+        array[i] = array[i + 1];
+        array[i + 1] = temp;
         console.log("post swap: ", array);
+        swapped = true;
       }
     }
   }
