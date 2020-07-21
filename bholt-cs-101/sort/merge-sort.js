@@ -3,27 +3,24 @@
 const inputArray = JSON.parse(process.argv.slice(2)[0]);
 
 const mergeSort = (array) => {
-  console.log("array", array);
   if (array.length === 1) {
     return array;
   } else {
-    const middle = array.length / 2;
+    const middle = Math.round(array.length / 2);
     const firstHalf = array.slice(0, middle);
-    console.log("firstHalf:", firstHalf);
     const secondHalf = array.slice(middle, array.length);
-    console.log("secondHalf:", secondHalf);
     return merge(mergeSort(firstHalf), mergeSort(secondHalf));
   }
 };
 
+// can alternatively mutate the arrays with shift, and would not need the pointers
 const merge = (sortedArray1, sortedArray2) => {
-  console.log("sortedArray1: ", sortedArray1);
-  console.log("sortedArray2: ", sortedArray2);
   const sortedCombinedArray = [];
   let sortedArray1Pointer = 0;
   let sortedArray2Pointer = 0;
   let array1Element = sortedArray1[sortedArray1Pointer];
   let array2Element = sortedArray2[sortedArray2Pointer];
+
   while (array1Element && array2Element) {
     if (array1Element < array2Element) {
       sortedCombinedArray.push(array1Element);
@@ -48,7 +45,6 @@ const merge = (sortedArray1, sortedArray2) => {
     }
   }
 
-  console.log("combinedArray: ", sortedCombinedArray);
   return sortedCombinedArray;
 };
 
