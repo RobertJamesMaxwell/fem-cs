@@ -1,5 +1,5 @@
 // pass command line arg as follows:
-// node bubble-sort.js '[4,5,6,1,2,3]'
+// node merge-sort.js '[4,5,6,1,2,3]'
 const inputArray = JSON.parse(process.argv.slice(2)[0]);
 
 const mergeSort = (array) => {
