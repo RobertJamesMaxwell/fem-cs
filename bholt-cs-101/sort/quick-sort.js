@@ -3,12 +3,11 @@
 const inputArray = JSON.parse(process.argv.slice(2)[0]);
 
 const quickSort = (array) => {
-  if (array.length === 1 || array.length === 0) {
+  if (array.length <= 1) {
     return array;
   }
   const lastIndex = array.length - 1;
   const pivot = array[lastIndex];
-
   const valuesSmallerThanPivot = [];
   const valuesLargerThanOrEqualToPivot = [];
 
