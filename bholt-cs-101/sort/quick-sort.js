@@ -3,25 +3,34 @@
 const inputArray = JSON.parse(process.argv.slice(2)[0]);
 
 const quickSort = (array) => {
-  let swapped = true;
-  // while (swapped) {
-  //   swapped = false;
-  //   for (let i = 0; i < array.length; i++) {
-  //     if (array[i] > array[i + 1]) {
-  //       console.log("pre swap: ", array);
-  //       const temp = array[i];
-  //       array[i] = array[i + 1];
-  //       array[i + 1] = temp;
-  //       console.log("post swap: ", array);
-  //       swapped = true;
-  //     }
-  //   }
-  // }
-  return array;
+  if (array.length === 1 || array.length === 0) {
+    return array;
+  }
+  const lastIndex = array.length - 1;
+  const pivot = array[lastIndex];
+
+  const valuesSmallerThanPivot = [];
+  const valuesLargerThanOrEqualToPivot = [];
+
+  let val;
+  for (let i = 0; i < lastIndex; i++) {
+    val = array[i];
+    if (val < pivot) {
+      valuesSmallerThanPivot.push(val);
+    } else {
+      valuesLargerThanOrEqualToPivot.push(val);
+    }
+  }
+
+  return [
+    ...quickSort(valuesSmallerThanPivot),
+    pivot,
+    ...quickSort(valuesLargerThanOrEqualToPivot),
+  ];
 };
 
 var hrstart = process.hrtime();
-const sortedArray = bubbleSort(inputArray);
+const sortedArray = quickSort(inputArray);
 console.log("Sorted array:", sortedArray);
 const hrend = process.hrtime(hrstart);
 console.info("Execution time: %ds %dms", hrend[0], hrend[1] / 1000000);
