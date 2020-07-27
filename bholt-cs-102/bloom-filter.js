@@ -6,12 +6,49 @@ function hash(string, number) {
   for (let i = 0; i < string.length; i++) {
     num = num + string.charCodeAt(i) * number;
   }
-  return num % 500;
+  return num % 100;
 }
 
-class BloomFilter {}
+class BloomFilter {
+  HASH_VALUES = [4, 5, 6];
 
-console.log(hash("Robert", 4));
-console.log(hash("Robert", 5));
-console.log(hash("Robert", 4));
-console.log(hash("Roberttt", 5));
+  constructor(size = 100) {
+    this.filter = new Array(size);
+    this.filter.fill(0);
+  }
+
+  add(string) {
+    const hash1 = hash(string, this.HASH_VALUES[0]);
+    const hash2 = hash(string, this.HASH_VALUES[1]);
+    const hash3 = hash(string, this.HASH_VALUES[2]);
+    if (!this.filter[hash1]) {
+      this.filter[hash1] = 1;
+    }
+    if (!this.filter[hash2]) {
+      this.filter[hash2] = 1;
+    }
+    if (!this.filter[hash3]) {
+      this.filter[hash3] = 1;
+    }
+  }
+
+  check(string) {
+    const hash1 = hash(string, this.HASH_VALUES[0]);
+    const hash2 = hash(string, this.HASH_VALUES[1]);
+    const hash3 = hash(string, this.HASH_VALUES[2]);
+    if (!this.filter[hash1] && !this.filter[hash2] && !this.filter[hash3]) {
+      return "no";
+    } else {
+      return "maybe";
+    }
+  }
+}
+
+const bf = new BloomFilter();
+// console.log(bf);
+bf.add("Robert");
+bf.add("Anja");
+// console.log(bf);
+console.log(bf.check("Robert"));
+console.log(bf.check("Anja"));
+console.log(bf.check("Maxwell"));
