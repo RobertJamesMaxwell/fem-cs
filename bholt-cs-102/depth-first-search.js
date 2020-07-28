@@ -54,7 +54,14 @@ const preorderTraverse = (node, array) => {
 };
 
 const inorderTraverse = (node, array) => {
-  // fill this out
+  if (node.left) {
+    inorderTraverse(node.left, array);
+  }
+  array.push(node.value);
+  if (node.right) {
+    inorderTraverse(node.right, array);
+  }
+  return array;
 };
 
 const postorderTraverse = (node, array) => {
@@ -62,3 +69,5 @@ const postorderTraverse = (node, array) => {
 };
 
 console.log(preorderTraverse(tree, []));
+console.log(inorderTraverse(tree, []));
+console.log(postorderTraverse(tree, []));
